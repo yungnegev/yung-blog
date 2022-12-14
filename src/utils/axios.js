@@ -1,7 +1,10 @@
 import axios from "axios";
 
+
+export const apiUrl = 'https://blogio-backend-production.up.railway.app'
+
 const instance = axios.create({
-    baseURL: 'https://blogio-backend-production.up.railway.app/'
+    baseURL: apiUrl
 })
 
 export default instance
