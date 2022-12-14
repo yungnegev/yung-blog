@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
+
 @font-face {
     font-family: 'Futura Bold';
     src: url('../assets/fonts/Futura\ Bold\ font.ttf');
@@ -18,7 +20,10 @@
 
 
 $bg-color: #10100E;
+$bg-ligther: #2D2D2D;
+$secondary: #2D2D2D;
 $text-color: #F8F1E8;
+$text-muted: #6c757d;
 $bold: 'Futura Heavy';
 $medium: 'Futura Medium';
 
@@ -55,4 +60,79 @@ body {
     flex-direction: column;
     align-items: center;
     @include body-format;
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 5%;
+        border-bottom: solid 1px $bg-ligther;
+        user-select: none;
+        margin-bottom: 4rem;
+
+        .logo {
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 0.4rem;
+                text-decoration: none;
+                img {
+                    width: 2.1rem;
+                    height: 2.1rem;
+                }
+                .logo-txt {
+                    color: $text-color;
+                    font-family: 'Major Mono Display';
+                    font-size: 2.3rem;
+                    span {
+                        color: $bg-ligther;
+                    }
+                }
+            }
+        }
+
+        .menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a {
+                text-decoration: none;
+                color: $text-color;
+                svg {
+                    font-size: 24px;
+                    cursor: pointer;
+                    transition: 100ms ease;
+                    &:hover {
+                        color: $secondary;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        color: $bg-ligther;
+        font-family: 'Futura Light', sans-serif;
+        letter-spacing: 0.05em;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin: 6rem 0;
+        user-select: none;
+        .socials {
+            display: flex;
+            gap: 1rem;
+            svg {
+                font-size: 24px;
+                cursor: pointer;
+                &:hover {
+                    color: $text-color;
+                }
+            }
+        }
+    }
 }

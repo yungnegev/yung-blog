@@ -4,7 +4,7 @@ import { postsReducer } from './slices/Post'
 
 const logger = createLogger()
 
-store = configureStore({
+const store = configureStore({
     reducer: {
         posts: postsReducer,
     },
