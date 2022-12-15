@@ -29,6 +29,8 @@ $text-color: #F8F1E8;
 $text-muted: darkgray;
 $bold: 'Futura Heavy';
 $medium: 'Futura Medium';
+$logo-font: 'Major Mono Display';
+$color-red: #BE264C;
 
 
 @mixin body-format {
@@ -181,10 +183,34 @@ body {
                 align-items: center;
                 svg {
                     font-size: 24px;
+                    color: $text-color;
                     cursor: pointer;
                     transition: 100ms ease;
                     &:hover {
                         color: $secondary;
+                    }
+                }
+            }
+            .menu-isauth {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1.6rem;
+                a {
+                    color: $text-color;
+                    transition: 160ms ease;
+                    font-size: 22px;
+                    &:hover {
+                        color: $bg-ligther;
+                    }
+                }
+                div {
+                    cursor: pointer;
+                    transition: all 160ms ease;
+                    font-size: 25px;
+                    margin-top: 5px;
+                    &:hover {
+                        color: $color-red;
                     }
                 }
             }
@@ -226,11 +252,66 @@ body {
             @include post-wrapper;
         }
     }
+
     .post-page {
         @include post-wrapper;
         .post-body {
             padding: 2rem;
             padding-top: 0;
+        }
+    }
+
+    .login-page {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        .form-wrapper {
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2rem;
+                h1 {
+                    user-select: none;
+                    font-family: $logo-font;
+                    span {
+                        color: $bg-ligther;
+                    }
+                }
+                input {
+                    width: 320px;
+                    background-color: $bg-ligther;
+                    border: none;
+                    color: $text-color;
+                    padding: 12px 20px;
+                    font-size: 20px;
+                    outline: none;
+                    border-bottom: solid $bg-color;
+                    font-family: 'Futura Medium', sans-serif;
+                    border-radius: 4px;
+                    &:focus {
+                        border-bottom: solid  $color-red;
+                    }
+                }
+                button {
+                    width: 200px;
+                    border: none;
+                    color: $bg-ligther;
+                    background-color: black;
+                    font-family: 'Futura Bold';
+                    padding: 20px 0px;
+                    font-size: 20px;
+                    letter-spacing: 0.1rem;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    &:hover {
+                        color: $text-color;
+                    }
+                }
+                .error-msg {
+                    color: $color-red;
+                }
+            }
         }
     }
 }
