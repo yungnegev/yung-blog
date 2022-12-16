@@ -7,9 +7,16 @@ import { apiUrl } from '../utils/axios'
 
 
 const PostSkeleton = ({ imageUrl, user, title, viewsCount, createdAt, id, text }) => {
-  return (
+  
+    const createMarkup = () => {
+        if (text){
+            return {__html: `${text}`}
+        }
+    }
+  
+    return (
     <div className='post-wrapper'>
-        <div className='post-img'>
+        <div className='post-img' id='post-img'>
             <img src={ imageUrl ? apiUrl + imageUrl : '' } alt="" />
         </div>
         <div className='user'>
@@ -29,8 +36,7 @@ const PostSkeleton = ({ imageUrl, user, title, viewsCount, createdAt, id, text }
                 <AiOutlineEye/><span>{viewsCount ? viewsCount : ''}</span>
             </div>
         </div>
-        <div className='post-body'>
-            {text ? text : ''}
+        <div className='post-body' dangerouslySetInnerHTML={createMarkup()} >
         </div>
     </div>
   )

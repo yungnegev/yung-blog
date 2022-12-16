@@ -30,7 +30,7 @@ const Navbar = () => {
         {
           isAuth 
               ? <div className='menu-isauth'><Link to='/add-post'><TfiWrite/></Link><div onClick={onClickLogout}><FiLogOut/></div></div>
-              : <Link clasName='login-link' to='/login'><FiLogIn /></Link> 
+              : <Link className='login-link' to='/login'><FiLogIn /></Link> 
         }
       </div>
     </nav>
