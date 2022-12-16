@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { loadPosts } from '../redux/slices/Posts'
 import { useDispatch, useSelector } from 'react-redux'
 import PostSkeleton from '../components/PostSkeleton'
+import Loading from '../components/Loading'
 
 const Home = () => {
   
@@ -28,13 +29,12 @@ const Home = () => {
                 key={post._id}
                 />
   })
-
   
   return (
     <div className='page home-page'>
       <div className='feed'>
         {isLoading 
-            ? <PostSkeleton /> 
+            ? <Loading /> 
             : $postFeed }
       </div>
     </div>

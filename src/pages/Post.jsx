@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import PostSkeleton from '../components/PostSkeleton'
 import { loadPost } from '../redux/slices/SinglePost'
+import Loading from '../components/Loading'
 
 const Post = () => {
 
@@ -11,6 +12,7 @@ const Post = () => {
   const isLoading = useSelector(state => state.singlePost.loading)
   const postData = useSelector(state => state.singlePost.items)
 
+ 
   useEffect(() => {
     dispatch(loadPost(postId))
   }, [])
@@ -21,7 +23,7 @@ const Post = () => {
   return (
     <div className='page post-page'>
       {isLoading 
-            ? 'Loading..'
+            ? <Loading/>
             : <PostSkeleton 
                       imageUrl={postData.imageUrl}
                       user={postData.user}

@@ -1,13 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import plugSrc from '../assets/images/user.png'
-import { AiOutlineEye } from 'react-icons/ai'
+import { AiOutlineEye, AiFillDelete } from 'react-icons/ai'
 import { MdDateRange } from 'react-icons/md'
 import { apiUrl } from '../utils/axios'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { removePost } from '../redux/slices/Posts'
+import { useNavigate } from 'react-router-dom'
 
 const PostSkeleton = ({ imageUrl, user, title, viewsCount, createdAt, id, text }) => {
+    
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const [button, setButton] = useState(null)
+    const authUserData = useSelector(state => state.auth.data)
+
+    const onDelete = (id) => {
+        dispatch(removePost(id))
+        navigate('/')
+    }
   
+    useEffect(() => {
+        if(authUserData?._id === user?._id){
+            setButton(<button onClick={() => onDelete(id)} id='delete-post'><AiFillDelete/></button>)
+        }
+    }, [])
+
     const createMarkup = () => {
         if (text){
             return {__html: `${text}`}
@@ -29,12 +48,15 @@ const PostSkeleton = ({ imageUrl, user, title, viewsCount, createdAt, id, text }
             </Link>
         </div>
         <div className='info'>
-            <div className='created-at'>
-                <MdDateRange/><span>{createdAt ? createdAt : ''}</span>
+            <div className="left-info">
+                <div className='created-at'>
+                    <MdDateRange/><span>{createdAt ? createdAt : ''}</span>
+                </div>
+                <div className='views'>
+                    <AiOutlineEye/><span>{viewsCount ? viewsCount : ''}</span>
+                </div>
             </div>
-            <div className='views'>
-                <AiOutlineEye/><span>{viewsCount ? viewsCount : ''}</span>
-            </div>
+            <div className="right-info">{button}</div>
         </div>
         <div className='post-body' dangerouslySetInnerHTML={createMarkup()} >
         </div>

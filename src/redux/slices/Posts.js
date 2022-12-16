@@ -6,6 +6,12 @@ export const loadPosts = createAsyncThunk('posts/loadPosts', async () => {
     return response.data
 })
 
+export const removePost = createAsyncThunk('posts/removePost', async (id) => {
+    const { data } = await axiosInst.delete(`/posts/${id}`)
+    return data
+})
+
+
 
 const initialState = {
     loading: false,
@@ -30,6 +36,13 @@ const postsSlice = createSlice({
             state.loading = false
             state.items = []
             state.error = action.error.message
+        })
+        builder.addCase(removePost.pending, (state) => {
+            state.loading = true
+        })
+        builder.addCase(removePost.fulfilled, (state, action) => {
+            state.loading = false
+            state.items = state.items.filter(obj => obj._id !== action.meta.arg)
         })
     }
 })
