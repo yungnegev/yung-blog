@@ -39,8 +39,8 @@ const AddPost = () => {
 
   const onSend = async () => {
     if (title && imageUrl && text) {
-      const { data } = await dispatch(sendPost(postInput))
-      navigate(`/posts/${data._id}`)
+      dispatch(sendPost(postInput))
+      navigate('/')
     } else {
       alert('Please fill in all the fields and upload an image.')
     }

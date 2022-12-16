@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { fetchLogin } from '../redux/slices/auth'
-import { Navigate } from 'react-router-dom'
+import { Navigate, Link } from 'react-router-dom'
 
 const Login = () => {
 
@@ -29,11 +29,12 @@ const Login = () => {
         <div className='form-wrapper'>
           <form onSubmit={handleSubmit(onSubmit)}>
             <h1>Yung<span>Blog</span></h1>
-            <input  {...register('email')} type='email' placeholder='email'/>
-            <input  {...register('password')} type='password' placeholder='password' />
+            <input  {...register('email')} type='email' placeholder='email' required/>
+            <input  {...register('password')} type='password' placeholder='password' required/>
             <button type='submit'>LOGIN</button>
             <div className='error-msg'>{authError}</div>
           </form>
+          <div><Link to='/register'>Or Register</Link></div>
         </div>
     </div>
   )

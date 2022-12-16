@@ -171,6 +171,68 @@ $color-red: #BE264C;
 
 
 
+@mixin form-wrapper {
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            h1 {
+                user-select: none;
+                font-family: $logo-font;
+                span {
+                    color: $bg-ligther;
+                }
+            }
+            input {
+                width: 320px;
+                background-color: $bg-ligther;
+                border: none;
+                color: $text-color;
+                padding: 12px 20px;
+                font-size: 20px;
+                outline: none;
+                border-bottom: solid $bg-color;
+                font-family: 'Futura Medium', sans-serif;
+                border-radius: 4px;
+                &:focus {
+                    border-bottom: solid  $color-red;
+                }
+            }
+            button {
+                width: 200px;
+                border: none;
+                color: $bg-ligther;
+                background-color: black;
+                font-family: 'Futura Bold';
+                padding: 20px 0px;
+                font-size: 20px;
+                letter-spacing: 0.1rem;
+                cursor: pointer;
+                border-radius: 4px;
+                &:hover {
+                    color: $text-color;
+                }
+            }
+            .error-msg {
+                color: $color-red;
+            }
+        }
+        a {
+            color: $bg-ligther;
+        }
+    }
+
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -319,55 +381,17 @@ body {
         height: 100vh;
         display: flex;
         align-items: center;
-        .form-wrapper {
-            form {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 2rem;
-                h1 {
-                    user-select: none;
-                    font-family: $logo-font;
-                    span {
-                        color: $bg-ligther;
-                    }
-                }
-                input {
-                    width: 320px;
-                    background-color: $bg-ligther;
-                    border: none;
-                    color: $text-color;
-                    padding: 12px 20px;
-                    font-size: 20px;
-                    outline: none;
-                    border-bottom: solid $bg-color;
-                    font-family: 'Futura Medium', sans-serif;
-                    border-radius: 4px;
-                    &:focus {
-                        border-bottom: solid  $color-red;
-                    }
-                }
-                button {
-                    width: 200px;
-                    border: none;
-                    color: $bg-ligther;
-                    background-color: black;
-                    font-family: 'Futura Bold';
-                    padding: 20px 0px;
-                    font-size: 20px;
-                    letter-spacing: 0.1rem;
-                    cursor: pointer;
-                    border-radius: 4px;
-                    &:hover {
-                        color: $text-color;
-                    }
-                }
-                .error-msg {
-                    color: $color-red;
-                }
-            }
-        }
+        @include form-wrapper;
     }
+
+    .register-page {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        @include form-wrapper;
+    }
+
+
     .add-page {
         .write-wrapper {
             display: flex;

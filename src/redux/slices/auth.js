@@ -12,6 +12,11 @@ export const fetchMe = createAsyncThunk('auth/me', async () => {
     return response.data
 })
 
+export const fetchRegister = createAsyncThunk('auth/register', async (data) => {
+    let response = await axios.post('/auth/register', data)
+    return response.data
+})
+
 
 let initialState = {
     isAuth: false,
@@ -53,6 +58,19 @@ const authSlice = createSlice({
             state.status = 'success'
         }),
         builder.addCase(fetchMe.rejected, (state, action) => {
+            state.isAuth = false
+            state.status = 'Nah fam...'
+            state.data = null
+        })
+        builder.addCase(fetchRegister.pending, (state) => {
+            state.status = 'loading...'
+        }),
+        builder.addCase(fetchRegister.fulfilled, (state, action) => {
+            state.isAuth = true
+            state.data = action.payload
+            state.status = 'success'
+        }),
+        builder.addCase(fetchRegister.rejected, (state, action) => {
             state.isAuth = false
             state.status = 'Nah fam...'
             state.data = null
