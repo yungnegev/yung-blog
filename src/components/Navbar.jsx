@@ -5,15 +5,18 @@ import { TfiWrite } from 'react-icons/tfi'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../redux/slices/auth'
+import { useNavigate } from 'react-router-dom'
  
 const Navbar = () => {
 
   const dispatch = useDispatch()
   const isAuth = useSelector(state => state.auth.isAuth)
+  const navigate = useNavigate()
 
   const onClickLogout = () => {
     dispatch(logout())
     window.localStorage.removeItem('token')
+    navigate('/login')
   } 
 
   return (

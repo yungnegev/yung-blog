@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import plugSrc from '../assets/images/user.png'
 import { AiOutlineEye, AiFillDelete } from 'react-icons/ai'
 import { MdDateRange } from 'react-icons/md'
+import { ImWrench } from 'react-icons/im'
 import { apiUrl } from '../utils/axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { removePost } from '../redux/slices/Posts'
@@ -13,7 +14,8 @@ const PostSkeleton = ({ imageUrl, user, title, viewsCount, createdAt, id, text }
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const [button, setButton] = useState(null)
+    const [delbtn, setDelbtn] = useState(null)
+    const [patchbtn, setPatchbtn] = useState(null)
     const authUserData = useSelector(state => state.auth.data)
 
     const onDelete = (id) => {
@@ -23,7 +25,10 @@ const PostSkeleton = ({ imageUrl, user, title, viewsCount, createdAt, id, text }
   
     useEffect(() => {
         if(authUserData?._id === user?._id){
-            setButton(<button onClick={() => onDelete(id)} id='delete-post'><AiFillDelete/></button>)
+            setDelbtn(<button onClick={() => onDelete(id)} id='delete-post'><AiFillDelete/></button>)
+        }
+        if(authUserData?._id === user?._id){
+            setPatchbtn(<button onClick={() => navigate(`/add-post/${id}`)} id='patch-post'><ImWrench/></button>)
         }
     }, [])
 
@@ -56,7 +61,10 @@ const PostSkeleton = ({ imageUrl, user, title, viewsCount, createdAt, id, text }
                     <AiOutlineEye/><span>{viewsCount ? viewsCount : ''}</span>
                 </div>
             </div>
-            <div className="right-info">{button}</div>
+            <div className="right-info">
+                {patchbtn}
+                {delbtn}
+            </div>
         </div>
         <div className='post-body' dangerouslySetInnerHTML={createMarkup()} >
         </div>

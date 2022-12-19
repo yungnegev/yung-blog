@@ -77,6 +77,11 @@ $color-red: #BE264C;
         &:hover #delete-post {
             display: flex;
         }
+        &:hover #patch-post {
+            display: flex;
+            color: $text-color;
+            border-color: $text-color;
+        }
         .post-img{
             width: 800px;
             object-fit: cover;
@@ -146,6 +151,10 @@ $color-red: #BE264C;
                 }
             }
             .right-info {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: fit-content;
                 button {
                     display: flex;
                     justify-content: center;

@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { BsUpload } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { sendPost } from '../redux/slices/SendPost'
 import axios from '../utils/axios'
-import { useNavigate, Navigate } from 'react-router-dom'
+import { useNavigate, Navigate, useParams } from 'react-router-dom'
+import { loadPost } from '../redux/slices/SinglePost'
 
 const AddPost = () => {
 
+  const urlId = useParams().id
+  const isEditing = Boolean(urlId) 
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const isAuth = useSelector(state => state.auth.isAuth)
@@ -16,6 +19,21 @@ const AddPost = () => {
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [imgName, setImgName] = useState('')
+
+  useEffect(() => {
+    const fetchData = async (urlId) => {
+    dispatch(loadPost(urlId)).then( data => {
+      console.log(data)
+      setTitle(data.payload.title)
+      setText(data.payload.text)
+      setImageUrl(data.payload.imageUrl)
+    })
+    }
+
+    fetchData(urlId)
+
+  }, [])
+
 
   let postInput = {
     title,
@@ -39,8 +57,14 @@ const AddPost = () => {
 
   const onSend = async () => {
     if (title && imageUrl && text) {
-      dispatch(sendPost(postInput))
-      navigate('/')
+      if(!isEditing) {
+        dispatch(sendPost(postInput))
+        navigate('/')
+      }
+      if(isEditing) {
+        axios.patch(`/posts/${urlId}`, postInput)
+        navigate(`/post/${urlId}`)
+      }
     } else {
       alert('Please fill in all the fields and upload an image.')
     }
@@ -53,8 +77,7 @@ const AddPost = () => {
   return (
     <div className="add-page">
       <div className="write-wrapper">
-        <div className='write'>
-      
+        <div className='write'> 
           <div className="content">
             <input type='text' value={title} onChange={(e) => setTitle(e.target.value)} placeholder='title' />
             <div className="editorContainer">
