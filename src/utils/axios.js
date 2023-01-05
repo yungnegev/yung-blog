@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export const apiUrl = 'http://45.95.234.147'
+export const apiUrl = 'https://yungtest.site/'
 
 const instance = axios.create({
     baseURL: apiUrl
