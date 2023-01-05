@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export const apiUrl = 'https://yungtest.site/'
+export const apiUrl = 'https://yungtest.site'
 
 const instance = axios.create({
     baseURL: apiUrl
