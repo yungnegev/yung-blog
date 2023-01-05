@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-export const apiUrl = 'https://blogio-backend-production.up.railway.app'
+export const apiUrl = 'http://45.95.234.147'
 
 const instance = axios.create({
     baseURL: apiUrl
